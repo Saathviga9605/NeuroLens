@@ -10,25 +10,14 @@ const PrivacyPage = () => {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.h1}>Privacy & Ethics — Quick Notes</h2>
+      <h2 style={styles.h1}>Privacy & Ethics</h2>
 
       <p style={styles.p}><strong>Local-first:</strong> All analysis runs locally by default. Your raw data stays on your device unless you explicitly export or share it.</p>
 
-      <p style={styles.p}><strong>User controls:</strong> You can export or delete any stored results at any time. No telemetry or external uploads occur without your explicit consent.</p>
-
-      <p style={styles.p}><strong>Non-diagnostic disclaimer:</strong> Outputs are informational and research-focused only — not medical or clinical advice. Consult a qualified professional for health concerns.</p>
-
-      <div style={styles.list}>
-        <ul>
-          <li>Export: user-initiated only</li>
-          <li>Delete: immediate local removal</li>
-          <li>Opt-in cloud features (if added) will require explicit consent</li>
-        </ul>
-      </div>
-
-      <p style={{ ...styles.p, marginTop: 20 }}>For any privacy questions or to request deletion instructions, see the project README or contact the application owner.</p>
+      <p style={styles.p}><strong>Non-diagnostic disclaimer:</strong> Outputs are informational and research-focused only, not medical or clinical advice. Consult a qualified professional for health concerns.</p>
     </div>
   );
 };
 
 export default PrivacyPage;
+
