@@ -1,0 +1,24 @@
+# NeuroLens — Voice Analysis Engine
+# Member 3 Dependencies
+
+# API Framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9      # Required for file uploads in FastAPI
+
+# Audio Processing & Feature Extraction
+librosa==0.10.2
+soundfile==0.12.1            # Audio file I/O (wav, flac, ogg)
+audioread==3.0.1             # mp3 support for librosa
+
+# Scientific Computing
+numpy==1.26.4
+scipy==1.13.0
+
+# ML (for future wav2vec upgrade)
+# torch==2.3.0               # Uncomment when upgrading to wav2vec
+# transformers==4.40.0       # Uncomment for wav2vec2 model
+
+# Utilities
+pydantic==2.7.0
+python-dotenv==1.0.1
