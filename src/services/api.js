@@ -3,12 +3,13 @@ import axios from "axios";
 /*
   Centralized Axios Instance
   ---------------------------
-  - Base URL points to local FastAPI backend
-  - Timeout prevents hanging requests
+  baseURL uses a relative path so Vite's dev proxy forwards requests
+  to the FastAPI backend at http://127.0.0.1:8000.
+  In production, configure your reverse proxy (nginx, etc.) accordingly.
 */
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: "/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json"
@@ -17,7 +18,7 @@ const API = axios.create({
 
 
 /* ============================
-   🔹 Assessment Endpoints
+   Assessment Endpoints
    ============================ */
 
 /**
@@ -33,7 +34,6 @@ export const runAssessment = async (data) => {
     throw error;
   }
 };
-
 
 /**
  * Get session history
@@ -51,7 +51,7 @@ export const getHistory = async () => {
 
 
 /* ============================
-   🔹 Behavioral Only (Optional)
+   Behavioral Endpoints
    ============================ */
 
 export const analyzeBehavior = async (data) => {
@@ -66,16 +66,13 @@ export const analyzeBehavior = async (data) => {
 
 
 /* ============================
-   🔹 Future: Voice + NLP
-   (Placeholders for expansion)
+   Future: Voice + NLP
    ============================ */
 
 export const analyzeVoice = async (formData) => {
   try {
     const response = await API.post("/voice/analyze", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
+      headers: { "Content-Type": "multipart/form-data" }
     });
     return response.data;
   } catch (error) {
@@ -93,10 +90,5 @@ export const analyzeNLP = async (data) => {
     throw error;
   }
 };
-
-
-/* ============================
-   🔹 Utility
-   ============================ */
 
 export default API;
