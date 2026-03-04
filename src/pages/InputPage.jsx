@@ -110,7 +110,7 @@ const InputPage = ({ setAnalysisResult }) => {
         />
         Late Night Usage
       </label>
-
+a
       <button
         onClick={handleAnalyze}
         style={{
