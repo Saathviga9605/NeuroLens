@@ -11,3 +11,4 @@ const AlertCard = ({ level = 'Info', title, detail }) => {
 };
 
 export default AlertCard;
+
