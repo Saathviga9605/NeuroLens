@@ -61,36 +61,56 @@ const Dashboard = ({ data, history = [] }) => {
       <AnimatedBackground />
       <div className="dashboard-inner">
 
-        <h2 style={{ fontSize: 20, fontWeight: 800 }}>
-          Cognitive Stability Dashboard
-        </h2>
+        <h2>Cognitive Stability Dashboard</h2>
 
         {!hasData && (
-          <div className="glass" style={{ padding: 24, marginTop: 20 }}>
-            No assessment available. Run a simulation first.
+          <div className="glass" style={{ padding: 48, marginTop: 32, textAlign: "center" }}>
+            <div style={{ 
+              width: 64, 
+              height: 64, 
+              margin: "0 auto 16px",
+              borderRadius: 16,
+              background: "linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(52, 211, 153, 0.05))",
+              border: "2px dashed rgba(52, 211, 153, 0.3)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 24,
+              fontWeight: 900,
+              color: "#34d399"
+            }}>—</div>
+            <div style={{ fontSize: 18, color: "#94a3b8", marginBottom: 8 }}>
+              No assessment available
+            </div>
+            <div style={{ fontSize: 14, color: "#64748b" }}>
+              Run a simulation to generate cognitive analysis data
+            </div>
           </div>
         )}
 
         {hasData && (
           <>
             {/* KPI CARDS */}
-            <div className="kpis glass">
+            <div className="kpis">
               <StatCard
                 title="Cognitive Stability Index"
                 value={`${data.csi_score}%`}
-                color="var(--accent)"
+                color="#34d399"
+                hint="Overall cognitive wellness score"
               />
 
               <StatCard
                 title="Risk Level"
                 value={riskText}
                 color={getRiskColor(riskText)}
+                hint={`Current mental health risk assessment`}
               />
 
               <StatCard
                 title="Behavioral Score"
                 value={`${data.behavioral_score ?? "--"}`}
-                color="var(--accent)"
+                color="#60a5fa"
+                hint="Activity pattern analysis"
               />
             </div>
 
@@ -98,70 +118,272 @@ const Dashboard = ({ data, history = [] }) => {
             <div className="main-panels">
 
               <div className="panel-large glass">
-                <h3>Overall Stability</h3>
+                <h3 style={{ marginBottom: 24 }}>Overall Stability Analysis</h3>
 
-                <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
-                  <div style={{ width: 260, height: 260 }}>
+                <div style={{ display: "flex", gap: 40, alignItems: "center" }}>
+                  <div style={{ 
+                    width: 280, 
+                    height: 280,
+                    position: "relative"
+                  }}>
                     <RadialGauge value={data.csi_score ?? 0} />
                   </div>
 
-                  <div>
-                    <div style={{ fontSize: 42, fontWeight: 800 }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ 
+                      fontSize: 64, 
+                      fontWeight: 900,
+                      background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      lineHeight: 1,
+                      letterSpacing: "-0.03em"
+                    }}>
                       {data.csi_score}%
                     </div>
-                    <div style={{ color: "#9ecbd8" }}>
+                    <div style={{ 
+                      color: "#94a3b8",
+                      fontSize: 16,
+                      marginTop: 8,
+                      marginBottom: 24
+                    }}>
                       Combined Fusion Score
                     </div>
 
-                    <div style={{ marginTop: 12 }}>
-                      Drift Flag:{" "}
-                      <strong>
-                        {data.drift_flag === 1 ? "Detected" : "Stable"}
-                      </strong>
+                    <div style={{ 
+                      display: "flex", 
+                      gap: 16,
+                      flexWrap: "wrap"
+                    }}>
+                      <div style={{
+                        background: data.drift_flag === 1 
+                          ? "rgba(251, 191, 36, 0.1)" 
+                          : "rgba(52, 211, 153, 0.1)",
+                        border: `1px solid ${data.drift_flag === 1 ? "rgba(251, 191, 36, 0.3)" : "rgba(52, 211, 153, 0.3)"}`,
+                        padding: "12px 20px",
+                        borderRadius: 10,
+                        fontSize: 14,
+                        position: "relative",
+                        paddingLeft: 28
+                      }}>
+                        <div style={{
+                          position: "absolute",
+                          left: 12,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          width: 3,
+                          height: 24,
+                          background: data.drift_flag === 1 
+                            ? "linear-gradient(180deg, #fbbf24, #f59e0b)"
+                            : "linear-gradient(180deg, #34d399, #10b981)",
+                          borderRadius: 2
+                        }} />
+                        <div style={{ 
+                          fontSize: 11, 
+                          color: "#64748b",
+                          textTransform: "uppercase",
+                          letterSpacing: 1,
+                          marginBottom: 4
+                        }}>
+                          Drift Status
+                        </div>
+                        <div style={{ 
+                          fontWeight: 700,
+                          color: data.drift_flag === 1 ? "#fbbf24" : "#34d399"
+                        }}>
+                          {data.drift_flag === 1 ? "Detected" : "Stable"}
+                        </div>
+                      </div>
+
+                      <div style={{
+                        background: data.risk_flag === 1 
+                          ? "rgba(239, 68, 68, 0.1)" 
+                          : "rgba(52, 211, 153, 0.1)",
+                        border: `1px solid ${data.risk_flag === 1 ? "rgba(239, 68, 68, 0.3)" : "rgba(52, 211, 153, 0.3)"}`,
+                        padding: "12px 20px",
+                        borderRadius: 10,
+                        fontSize: 14,
+                        position: "relative",
+                        paddingLeft: 28
+                      }}>
+                        <div style={{
+                          position: "absolute",
+                          left: 12,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          width: 3,
+                          height: 24,
+                          background: data.risk_flag === 1 
+                            ? "linear-gradient(180deg, #ef4444, #dc2626)"
+                            : "linear-gradient(180deg, #34d399, #10b981)",
+                          borderRadius: 2
+                        }} />
+                        <div style={{ 
+                          fontSize: 11, 
+                          color: "#64748b",
+                          textTransform: "uppercase",
+                          letterSpacing: 1,
+                          marginBottom: 4
+                        }}>
+                          Risk Assessment
+                        </div>
+                        <div style={{ 
+                          fontWeight: 700,
+                          color: data.risk_flag === 1 ? "#ef4444" : "#34d399"
+                        }}>
+                          {data.risk_flag === 1 ? "High" : "Low"}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="panel-right">
-                <div className="glass" style={{ padding: 12 }}>
-                  <h4>Stability Trend</h4>
-                  <TrendChart data={trendData} height={160} />
+                <div className="glass" style={{ padding: 24 }}>
+                  <h3 style={{ marginBottom: 16 }}>Stability Trend</h3>
+                  <TrendChart data={trendData} height={180} />
                 </div>
               </div>
             </div>
 
             {/* ENGINES */}
-            <div style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 32 }}>
+              <h3 style={{ marginBottom: 16, fontSize: 16 }}>AI Engine Status</h3>
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(4,1fr)",
-                  gap: 12
+                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                  gap: 20
                 }}
               >
-                <div className="glass" style={{ padding: 14 }}>
-                  <h4>Behavioral Engine</h4>
-                  <div style={{ fontSize: 28, fontWeight: 700 }}>
+                <div className="glass" style={{ padding: 24, textAlign: "center" }}>
+                  <div style={{ 
+                    width: 48, 
+                    height: 48, 
+                    margin: "0 auto 12px",
+                    borderRadius: 12,
+                    background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 16,
+                    fontWeight: 900,
+                    color: "#0a0e1a"
+                  }}>BE</div>
+                  <h4 style={{ color: "#e0f2fe" }}>Behavioral Engine</h4>
+                  <div style={{ 
+                    fontSize: 36, 
+                    fontWeight: 800,
+                    background: "linear-gradient(135deg, #34d399 0%, #10b981 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    marginTop: 12
+                  }}>
                     {data.behavioral_score ?? "--"}
                   </div>
+                  <div style={{ 
+                    fontSize: 11, 
+                    color: "#34d399", 
+                    marginTop: 8,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: 1
+                  }}>Active</div>
                 </div>
 
-                <div className="glass" style={{ padding: 14 }}>
-                  <h4>NLP Engine</h4>
-                  <div style={{ opacity: 0.6 }}>Awaiting Data</div>
+                <div className="glass" style={{ padding: 24, textAlign: "center", opacity: 0.6 }}>
+                  <div style={{ 
+                    width: 48, 
+                    height: 48, 
+                    margin: "0 auto 12px",
+                    borderRadius: 12,
+                    background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 16,
+                    fontWeight: 900,
+                    color: "#0a0e1a"
+                  }}>NL</div>
+                  <h4 style={{ color: "#e0f2fe" }}>NLP Engine</h4>
+                  <div style={{ fontSize: 14, color: "#64748b", marginTop: 20 }}>
+                    Awaiting Data
+                  </div>
+                  <div style={{ 
+                    fontSize: 11, 
+                    color: "#64748b", 
+                    marginTop: 8,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: 1
+                  }}>Standby</div>
                 </div>
 
-                <div className="glass" style={{ padding: 14 }}>
-                  <h4>Voice Engine</h4>
-                  <div style={{ opacity: 0.6 }}>Awaiting Data</div>
+                <div className="glass" style={{ padding: 24, textAlign: "center", opacity: 0.6 }}>
+                  <div style={{ 
+                    width: 48, 
+                    height: 48, 
+                    margin: "0 auto 12px",
+                    borderRadius: 12,
+                    background: "linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 16,
+                    fontWeight: 900,
+                    color: "#0a0e1a"
+                  }}>VO</div>
+                  <h4 style={{ color: "#e0f2fe" }}>Voice Engine</h4>
+                  <div style={{ fontSize: 14, color: "#64748b", marginTop: 20 }}>
+                    Awaiting Data
+                  </div>
+                  <div style={{ 
+                    fontSize: 11, 
+                    color: "#64748b", 
+                    marginTop: 8,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: 1
+                  }}>Standby</div>
                 </div>
 
-                <div className="glass" style={{ padding: 14 }}>
-                  <h4>Fusion Engine</h4>
-                  <div style={{ fontSize: 28, fontWeight: 700 }}>
+                <div className="glass" style={{ padding: 24, textAlign: "center" }}>
+                  <div style={{ 
+                    width: 48, 
+                    height: 48, 
+                    margin: "0 auto 12px",
+                    borderRadius: 12,
+                    background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 16,
+                    fontWeight: 900,
+                    color: "#0a0e1a"
+                  }}>FU</div>
+                  <h4 style={{ color: "#e0f2fe" }}>Fusion Engine</h4>
+                  <div style={{ 
+                    fontSize: 36, 
+                    fontWeight: 800,
+                    background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    marginTop: 12
+                  }}>
                     {data.csi_score}%
                   </div>
+                  <div style={{ 
+                    fontSize: 11, 
+                    color: "#60a5fa", 
+                    marginTop: 8,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: 1
+                  }}>Active</div>
                 </div>
               </div>
             </div>
@@ -170,18 +392,18 @@ const Dashboard = ({ data, history = [] }) => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 360px",
-                gap: 12,
-                marginTop: 20
+                gridTemplateColumns: "1.5fr 1fr",
+                gap: 20,
+                marginTop: 32
               }}
             >
-              <div className="glass" style={{ padding: 12 }}>
-                <h4>Drift Visualization</h4>
+              <div className="glass" style={{ padding: 24 }}>
+                <h3 style={{ marginBottom: 16 }}>Drift Visualization</h3>
                 <DriftChart data={trendData} />
               </div>
 
-              <div className="glass" style={{ padding: 12 }}>
-                <h4>System Alerts</h4>
+              <div className="glass" style={{ padding: 24 }}>
+                <h3 style={{ marginBottom: 16 }}>System Alerts</h3>
 
                 {data.drift_flag === 1 && (
                   <AlertCard

@@ -1,14 +1,55 @@
 # Node
 node_modules/
 dist/
+build/
+.cache/
 
 # Python
 venv/
+env/
+ENV/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Environment
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+cognitive_data.db
+
+# Environment & Configuration
 .env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # System files
 .DS_Store
+Thumbs.db
+*.log
+
+# Service logs
+logs/
+*.log
+
+# Service PID files
+.pids
+
+# Build outputs
+*.whl
+*.tar.gz
