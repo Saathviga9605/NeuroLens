@@ -1,5 +1,14 @@
+# Node
 node_modules/
-venv/
-.env
-__pycache__/
 dist/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# System files
+.DS_Store
