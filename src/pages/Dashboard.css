@@ -1,0 +1,159 @@
+.dashboard-wrap {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.dashboard-inner {
+  position: relative;
+  z-index: 1;
+  padding: 4px 0;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.main-panels {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.panel-large {
+  padding: 18px;
+}
+
+.panel-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* StatCard */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 14px 16px;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--accent-light);
+}
+
+.card-meta {
+  flex: 1;
+}
+
+.card-value {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.card-title {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.card-hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Animated background orbs */
+.animated-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.055;
+  animation: orbFloat 14s ease-in-out infinite;
+}
+
+.orb1 {
+  width: 520px;
+  height: 520px;
+  background: #34d399;
+  top: -220px;
+  left: -120px;
+  animation-delay: 0s;
+}
+
+.orb2 {
+  width: 420px;
+  height: 420px;
+  background: #60a5fa;
+  top: 80px;
+  right: -160px;
+  animation-delay: -5s;
+}
+
+.orb3 {
+  width: 320px;
+  height: 320px;
+  background: #f472b6;
+  bottom: -60px;
+  left: 30%;
+  animation-delay: -9s;
+}
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(28px) scale(1.04);
+  }
+}
+
+@media (max-width: 900px) {
+  .main-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .kpis {
+    grid-template-columns: 1fr;
+  }
+}
